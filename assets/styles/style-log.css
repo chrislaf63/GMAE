@@ -1,0 +1,54 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    height: 160px;
+    background-color: #1464b8;
+}
+
+.logo {
+    padding-left: 50px;
+}
+
+main {
+    height: calc(100vh - 160px);
+    background-image: url("/assets/img/Background-login.jpg");
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login {
+    font-family: sans-serif;
+
+    background-color: rgba(217, 217, 217, 0.8);
+    width: 400px;
+    height: 450px;
+}
+
+.log-form {
+    display: block;
+    text-align: center;
+    font-size: 1.3em;
+    font-weight: 600;
+    margin-block: 25px;
+}
+
+form {
+    margin-top: 50px;
+    padding-inline: 30px;
+}
+label {
+    display: block;
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+
+input {
+    width: 300px;
+    padding-block: 10px;
+}

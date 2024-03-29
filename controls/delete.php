@@ -18,6 +18,8 @@ try {
 
 if (isset($_POST['edit'])) {
     $value = $_POST['edit'];
+    var_dump($value);
+
         try {
             $bdd = new Database();
             $bdd->connect();
@@ -29,12 +31,12 @@ if (isset($_POST['edit'])) {
                 $_SESSION['id_category'] = $id_category;
                 $id_formule = $row->id_formule;
                 $_SESSION['id_formule'] = $id_formule;
+                $_SESSION['slug'] = $row->image_url;
             endforeach;
             $bdd = null;
         } catch (PDOException $e) {
             die("erreur " . $e->getMessage());
         }
-
 
     $category = new Category("", "");
     $category->deleteCategorie($id_category);
@@ -45,11 +47,12 @@ if (isset($_POST['edit'])) {
     $travel = new Voyage("", "", "", "", "", "");
     $travel->deleteVoyage($value);
     unset($travel);
+    unlink($_SESSION['slug']);
     $_SESSION['slug'] = null;
     $_SESSION['identified'] = null;
     $_POST['edit'] = null;
     sleep(6);
-    header('Location: /menu.php');
+    header('Location: /controls/menu.php');
 }
 ?>
 <html lang="fr">
@@ -122,14 +125,18 @@ if (isset($_POST['edit'])) {
         <div class="point3"></div>
     </div>
     <div class="success invisible">Voyage supprimé!</div>
-    <form method="POST" action="delete.php" name="deleteForm">
+    <form method="POST" action="delete.php" name="deleteForm" id="deleteForm">
         <input type="button" id="delete" value="SUPPRIMER LA SELECTION">
         <div class="container">
             <?php
             foreach ($response as $row):
-                if(!isset($_POST['']))
+                if(!isset($_POST['sortTheme']) && !isset($_POST['sortRegion'])){
                 include('template.php');
-            var_dump($row);
+                } elseif(isset($_POST['sortTheme']) || isset($_POST['sortRegion'])){
+                    if(($_POST['sortTheme'] == $row->theme) || ($_POST['sortRegion'] == $row->region)){
+                        include('template.php');
+                    }
+                }
             endforeach;
             ?>
         </div>

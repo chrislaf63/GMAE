@@ -61,12 +61,18 @@ h1{
     margin-left: 10px;
 }
 
-.formSort .sortButton{
+.sortButton{
     width: 100px;
     margin-left: 100px;
     padding-block: 5px;
     text-transform: uppercase;
     font-weight: 600;
+}
+
+.sortButton,
+#edit,
+#delete:hover{
+    cursor: pointer;
 }
 
 form {

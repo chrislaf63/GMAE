@@ -1,52 +1,17 @@
 <!DOCTYPE html>
 <html lang="fr">
-    <?php 
-    require_once('dbconnect.php');
+    <?php
+    session_start();
+    require_once('controls/dbconnect.php');
+    require_once('classes/user.php');
+    $_SESSION['invalidPassword'] = null;
+    $_SESSION['accessDenied'] = null;
+    $_SESSION['incorrectUser'] = null;
 
-    class User{
-
-        public function login(){
-            try{
-        
-            $bdd = new Database();
-            $bdd->connect();
-            $request = $bdd->connection->prepare("SELECT * FROM `users` INNER JOIN `roles` ON users.id_role = roles.id");
-            $request->execute();
-            $result = $request->fetchAll(PDO::FETCH_OBJ);
-            var_dump($result);
-            foreach($result as $row):
-                if($row->username == $_POST['username']){
-                    if($row->role == "admin"){
-                        if($row->password == $_POST['password']){
-                            echo "connexion réussie";
-                            header('location: /menu.php');
-                            // exit();
-                            // break;
-                        } else {
-                            echo "Mot de passe incorrect";
-                            $_POST['username'] = null;
-                            $_POST['password'] = null;
-                            break;
-                        }
-                    } else {
-                        echo "Accès refusé";
-                        $_POST['username'] = null;
-                        $_POST['password'] = null;
-                        break;
-                    }
-                } 
-            endforeach;
-            // echo "identifiant incorrect";
-
-            }
-            catch (PDOException $e) {
-                die("erreur " . $e->getMessage());
-            }
-        }
-    }
     if(isset($_POST['username']) && isset($_POST['password'])){
         $admin = new User;
         $admin->login();
+        $admin = null;
     }
 
     ?>
@@ -67,10 +32,13 @@
             <span class="log-form">CONNECTEZ-VOUS A VOTRE ESPACE</span>
             <form action="" method="POST">
                 <label for="username">NOM D'UTILISATEUR</label>
-                <input type="text" name="username" id="username">
+                <input type="text" name="username" id="username"><br>
+                <small><?php echo $_SESSION['incorrectUser']?></small>
                 <label for="password">MOT DE PASSE</label>
-                <input type="password" name="password" id="password">
+                <input type="password" name="password" id="password"><br>
+                <small><?php echo $_SESSION['invalidPassword'] ?></small><br>
                 <input type="submit" value="connexion">
+                <p class="denied"><?php echo  $_SESSION['accessDenied'] ?></p>
             </form>
         </div>
     </main>

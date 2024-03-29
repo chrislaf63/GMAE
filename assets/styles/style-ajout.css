@@ -44,7 +44,7 @@ label {
     margin-left: 20px;
 }
 
-#theme {
+#cate {
     width: 200px;
     margin-left: 51px;
 }
@@ -80,6 +80,23 @@ input[type="File"] {
 
 input[type="submit"] {
     font-size: 1.1em;
+    font-weight: 600;
+    background-color: limegreen;
+    font-family: sans-serif;
+    width: 150px;
+    margin-left: calc(50% - 75px);
+    margin-right: calc(50% - 75px);
+    margin-top: 30px;
+    border: none;
+    padding-block: 10px;
+    border-radius: 15px;
+    transition: all .4s;
+}
+
+input[type="submit"]:hover{
+    cursor: pointer;
+    background-color: green;
+    color: #ffffff;
 }
 
 /* WIDTH */
@@ -136,4 +153,61 @@ input[type="submit"] {
 
 .pi-10 {
     padding-inline: 10px;
+}
+
+.loader{
+    margin-top: 40px;
+    margin-left: calc(50% - 125px);
+    width: 250px;
+    height: 50px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.point1,
+.point2,
+.point3{
+    width: 10px;
+    height: 10px;
+    background-color: #ffffff;
+    border-radius: 50%;
+}
+
+.point1{
+    animation: loader 1s 0.1s infinite;
+}
+
+.point2{
+    animation: loader 1s 0.33s infinite;
+}
+
+.point3{
+    animation: loader 1s 0.67s infinite;
+}
+
+.invisible {
+    display: none;
+}
+
+.success{
+    margin-top: 25px;
+    color: limegreen;
+    font-weight: 600;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: sans-serif;
+}
+
+@keyframes loader{
+    0%{
+        transform: scale(1);
+    }
+    50%{
+        transform: scale(5);
+        }
+    100%{
+        transform: scale(1);
+    }
+
 }

@@ -8,10 +8,12 @@ session_start();
     $erreur = null;
     $uploadStatus = null;
     $url = null;
-    if(isset($_GET['edit'])){
-        $_SESSION['identified'] = $_GET['edit'];
+    if (isset($_GET['edit'])) {
+        if($_GET['edit'] != "") {
+            $_SESSION['identified'] = $_GET['edit'];
+        }
     }
-    $value = $_SESSION['identified'];
+$value = $_SESSION['identified'];
 
     try{
 //        RECUPERATION DES DONNEES DU VOYAGE

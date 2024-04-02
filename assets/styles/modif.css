@@ -15,7 +15,7 @@ header {
     left: 0;
     top: 0;
     height: 160px;
-    background-color:  rgba(20, 100, 184, 0.8);
+    background-color:  rgba(20, 100, 184, 0.9);
     z-index: 2;
 }
 
@@ -34,7 +34,7 @@ main {
 h1{
     position: fixed;
     left: 600px;
-    top : 30px;
+    top : 20px;
     text-transform: uppercase;
     color: #ffffff;
     text-align: center;
@@ -42,10 +42,14 @@ h1{
 }
 
 .formSort{
+    position: fixed;
+    top: 60px;
+    left: calc(50vw - 500px);
     width: 1000px;
     margin-block: 15px;
-    margin-left: calc(50vw - 500px);
-    margin-right: calc(50vw - 500px);
+    z-index: 2;
+    /*margin-left: calc(50vw - 500px);*/
+    /*margin-right: calc(50vw - 500px);*/
 }
 
 .formSort label{
@@ -82,7 +86,7 @@ form {
 #delete,
 #edit{
     position: fixed;
-    top: 80px;
+    top: 100px;
     left: 800px;
     z-index: 2;
     padding-block: 5px;

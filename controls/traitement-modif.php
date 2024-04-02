@@ -62,30 +62,22 @@ session_start();
         //Début des vérifications de sécurité...
         if (!empty($fichier)) {
 
-            if (!in_array($extension, $extensions)) //Si l'extension n'est pas dans le tableau
+            if (!in_array($extension, $extensions))
                 :
                 $erreur = 'Veuillez envoyer un fichier de type jpg, jpeg ou png';
                 $uploadStatus = '<span class="invalid">Echec de l\'upload !</span>';
             endif;
 
-            // if($taille>$taille_maxi)
-            // :
-            //     $erreur = 'Le fichier est trop gros, 2 Mo maxi ...';
-            //     $uploadStatus = '<span class="invalid">Echec de l\'upload !</span>';
-            // endif;
-
-            if (!isset($erreur)) //S'il n'y a pas d'erreur, on upload
+            if (!isset($erreur))
             {
-                //On formate le nom du fichier ici...
                 $fichier = strtr($fichier,
                     'ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿ',
                     'AAAAAACEEEEIIIIOOOOOUUUUYaaaaaaceeeeiiiioooooouuuuyy');
                 $fichier = preg_replace('/([^.a-z0-9]+)/', '-', $fichier);
-                if (move_uploaded_file($_FILES['upload']['tmp_name'], $dossier . $fichier)) //Si la fonction renvoie TRUE, c'est que ça a fonctionné...
+                if (move_uploaded_file($_FILES['upload']['tmp_name'], $dossier . $fichier))
                 {
-                    $uploadStatus = '<span>Envoie effectué avec succès</span>';
                     $url = $dossier . $fichier;
-                } else //Sinon (la fonction renvoie FALSE).
+                } else
                 {
                     $uploadStatus = '<span>Echec de l\'upload !</span>';
                 }

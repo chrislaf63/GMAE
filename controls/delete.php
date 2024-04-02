@@ -5,6 +5,7 @@ require_once('../classes/Voyage.php');
 require_once('../classes/Category.php');
 require_once('../classes/Formule.php');
 
+//RECUPERATION DES DONNEES PAR AFFICHAGE DES VOYAGES
 try {
     $bdd = new Database();
     $bdd->connect();
@@ -18,8 +19,6 @@ try {
 
 if (isset($_POST['edit'])) {
     $value = $_POST['edit'];
-    var_dump($value);
-
         try {
             $bdd = new Database();
             $bdd->connect();
@@ -27,10 +26,8 @@ if (isset($_POST['edit'])) {
             $request->execute();
             $response = $request->fetchAll(PDO::FETCH_OBJ);
             foreach ($response as $row):
-                $id_category = $row->id_categorie;
-                $_SESSION['id_category'] = $id_category;
-                $id_formule = $row->id_formule;
-                $_SESSION['id_formule'] = $id_formule;
+                $_SESSION['id_category'] = $row->id_categorie;
+                $_SESSION['id_formule'] = $row->id_formule;
                 $_SESSION['slug'] = $row->image_url;
             endforeach;
             $bdd = null;
@@ -39,10 +36,10 @@ if (isset($_POST['edit'])) {
         }
 
     $category = new Category("", "");
-    $category->deleteCategorie($id_category);
+    $category->deleteCategorie($_SESSION['id_category']);
     unset($category);
     $formule = new Formule("", "");
-    $formule->deleteFormule($id_formule);
+    $formule->deleteFormule($_SESSION['id_formule']);
     unset($formule);
     $travel = new Voyage("", "", "", "", "", "");
     $travel->deleteVoyage($value);

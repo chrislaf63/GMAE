@@ -4,6 +4,10 @@
     box-sizing: border-box;
 }
 
+body {
+    font-family: sans-serif;
+}
+
 header {
     height: 160px;
     background-color: #1464b8;
@@ -40,12 +44,15 @@ h1 {
     height: 300px;
     width: 300px;
     border-radius: 50%;
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
 }
 
 .action__title {
     text-align: center;
     margin-top: 35px;
     margin-bottom: 15px;
+    font-weight: 600;
+
 }
 
 .action img {

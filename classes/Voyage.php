@@ -1,4 +1,5 @@
 <?php
+namespace Classes;
 class Voyage
 {
     public $param1;
@@ -24,20 +25,20 @@ class Voyage
             $bdd->connect();
             $request = $bdd->connection->prepare("SELECT `id` FROM `categories` ORDER BY `id` DESC LIMIT 1 ");
             $request->execute();
-            $response = $request->fetchAll(PDO::FETCH_OBJ);
+            $response = $request->fetchAll(\PDO::FETCH_OBJ);
             foreach($response as $row):
                 $id_categorie = $row->id;
             endforeach;
             $request = $bdd->connection->prepare("SELECT `id` FROM `formule` ORDER BY `id` DESC LIMIT 1 ");
             $request->execute();
-            $response = $request->fetchAll(PDO::FETCH_OBJ);
+            $response = $request->fetchAll(\PDO::FETCH_OBJ);
             foreach($response as $row):
                 $id_formule = $row->id;
             endforeach;
             $bdd->connection->query("INSERT INTO `voyage`(`id_categorie`,`id_formule`,`title`,`image_url`,`description`,`description2`,`description3`,`description4`) VALUES (\"$id_categorie\", \"$id_formule\", \"$this->param1\", \"$this->param2\", \"$this->param3\", \"$this->param4\", \"$this->param5\", \"$this->param6\")");
             $bdd = null;
         }
-        catch (PDOException $e) {
+        catch (\PDOException $e) {
             die("erreur " . $e->getMessage());
         }
     }
@@ -48,7 +49,7 @@ class Voyage
             $bdd->connect();
             $bdd->connection->query("UPDATE `voyage` SET `title`=\"$this->param1\",`image_url`=\"$this->param2\",`description`=\"$this->param3\",`description2`=\"$this->param4\",`description3`=\"$this->param5\",`description4`=\"$this->param6\" WHERE $id = `id_voyage`");
         }
-        catch (PDOException $e) {
+        catch (\PDOException $e) {
             die("erreur " . $e->getMessage());
         }
     }
@@ -59,7 +60,7 @@ class Voyage
             $bdd->connect();
             $bdd->connection->query("DELETE FROM `voyage` WHERE $id = `id_voyage`");
         }
-        catch (PDOException $e) {
+        catch (\PDOException $e) {
             die("erreur " . $e->getMessage());
         }
     }

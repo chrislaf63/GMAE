@@ -2,14 +2,15 @@
 <html lang="fr">
     <?php
     session_start();
-    require_once('controls/dbconnect.php');
-    require_once('classes/user.php');
+
+    require 'vendor/autoload.php';
+
     $_SESSION['invalidPassword'] = null;
     $_SESSION['accessDenied'] = null;
     $_SESSION['incorrectUser'] = null;
 
     if(isset($_POST['username']) && isset($_POST['password'])){
-        $admin = new User;
+        $admin = new Classes\User;
         $admin->login();
         $admin = null;
     }

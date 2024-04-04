@@ -1,9 +1,7 @@
 <?php
 session_start();
-    require_once('dbconnect.php');
-    require_once('../classes/Voyage.php');
-    require_once('../Classes/Category.php');
-    require_once('../Classes/Formule.php');
+
+require '../vendor/autoload.php';
 
 //    DECLARATION VARIABLES
     $sejour = null;
@@ -95,13 +93,13 @@ session_start();
         if ($url == "") {
             $url = $_SESSION['slug'];
         }
-        $category = new Category($cate, $region);
+        $category = new Classes\Category($cate, $region);
         $category->updateCategorie($_SESSION['id_category']);
         unset($category);
-        $formule = new Formule($sejour, $sejour2);
+        $formule = new Classes\Formule($sejour, $sejour2);
         $formule->upDateFormule($_SESSION['id_formule']);
         unset($formule);
-        $travel = new Voyage($titresejour, $url, $description, $description1, $description2, $description3);
+        $travel = new Classes\Voyage($titresejour, $url, $description, $description1, $description2, $description3);
         $travel->editVoyage($_SESSION['identified']);
         unset($travel);
         $_SESSION['slug'] = null;

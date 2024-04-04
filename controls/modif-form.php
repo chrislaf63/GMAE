@@ -2,9 +2,11 @@
 <html lang="fr">
 <?php
 session_start();
-    require_once('dbconnect.php');
-    require_once ('../classes/Voyage.php');
+//    require_once('dbconnect.php');
+//    require_once ('../classes/Voyage.php');
     require('session.php');
+    require '../vendor/autoload.php';
+    use Classes\Database;
     $erreur = null;
     $uploadStatus = null;
     $url = null;

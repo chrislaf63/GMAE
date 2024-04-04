@@ -1,0 +1,19 @@
+{
+  "name": "christophe/gmae",
+  "description": "projet de console d'administration de site de voyage",
+  "minimum-stability": "stable",
+  "authors": [
+    {
+      "name": "christophe LAFARGE",
+      "email": "chrislaf63@gmail.com"
+    }
+  ],
+  "require": {
+    "ext-pdo": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Classes\\" : "classes/"
+    }
+  }
+}

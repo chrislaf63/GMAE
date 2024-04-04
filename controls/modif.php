@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <?php
-require_once('dbconnect.php');
+//require_once('dbconnect.php');
+require '../vendor/autoload.php';
 
 try {
-    $bdd = new Database();
+    $bdd = new Classes\Database();
     $bdd->connect();
     $request = $bdd->connection->prepare("SELECT * FROM `voyage` INNER JOIN `formule` ON voyage.id_formule = formule.id INNER JOIN `categories` ON voyage.id_categorie = categories.id");
     $request->execute();

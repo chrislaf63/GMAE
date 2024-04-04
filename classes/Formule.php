@@ -1,5 +1,5 @@
 <?php
-
+    namespace Classes;
 class Formule
 {
     public $param1;

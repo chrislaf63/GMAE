@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <?php
-require_once('dbconnect.php');
-require_once('../classes/Voyage.php');
-require_once('../classes/Category.php');
-require_once('../classes/Formule.php');
+
+require '../vendor/autoload.php';
 
 //RECUPERATION DES DONNEES PAR AFFICHAGE DES VOYAGES
 try {
-    $bdd = new Database();
+    $bdd = new Classes\Database();
     $bdd->connect();
     $request = $bdd->connection->prepare("SELECT * FROM `voyage` INNER JOIN `formule` ON voyage.id_formule = formule.id INNER JOIN `categories` ON voyage.id_categorie = categories.id");
     $request->execute();
@@ -20,7 +18,7 @@ try {
 if (isset($_POST['edit'])) {
     $value = $_POST['edit'];
         try {
-            $bdd = new Database();
+            $bdd = new Classes\Database();
             $bdd->connect();
             $request = $bdd->connection->prepare("SELECT * FROM `voyage` WHERE `id_voyage` = $value");
             $request->execute();
@@ -35,13 +33,13 @@ if (isset($_POST['edit'])) {
             die("erreur " . $e->getMessage());
         }
 
-    $category = new Category("", "");
+    $category = new Classes\Category("", "");
     $category->deleteCategorie($_SESSION['id_category']);
     unset($category);
-    $formule = new Formule("", "");
+    $formule = new Classes\Formule("", "");
     $formule->deleteFormule($_SESSION['id_formule']);
     unset($formule);
-    $travel = new Voyage("", "", "", "", "", "");
+    $travel = new Classes\Voyage("", "", "", "", "", "");
     $travel->deleteVoyage($value);
     unset($travel);
     unlink($_SESSION['slug']);

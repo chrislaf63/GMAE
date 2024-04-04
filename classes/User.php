@@ -1,5 +1,5 @@
 <?php
-
+namespace Classes;
 class User
 {
     public function login(){
@@ -8,7 +8,7 @@ class User
             $bdd->connect();
             $request = $bdd->connection->prepare("SELECT * FROM `users` INNER JOIN `roles` ON users.id_role = roles.id");
             $request->execute();
-            $result = $request->fetchAll(PDO::FETCH_OBJ);
+            $result = $request->fetchAll(\PDO::FETCH_OBJ);
             foreach($result as $row):
                 if($row->username == $_POST['username']){
                     if($row->role == "admin"){
@@ -36,7 +36,7 @@ class User
            }
             $bdd = null;
         }
-        catch (PDOException $e) {
+        catch (\PDOException $e) {
             die("erreur " . $e->getMessage());
         }
     }

@@ -15,10 +15,7 @@
     $uploadStatus = null;
     $url = null;
 
-    require_once('dbconnect.php');
-    require_once('../classes/Category.php');
-    require_once('../classes/Formule.php');
-    require_once('../classes/Voyage.php');
+    require '../vendor/autoload.php';
 
     if(!empty($_POST['cate'])){
             $cate = $_POST['cate'];
@@ -107,13 +104,13 @@
             }
 
             if($cate != "" && $region != "" && $sejour != "" && $titresejour != "" && $description != "" && $description1 != "" && $description2 != ""){
-                $theme = new Category($cate, $region);
+                $theme = new Classes\Category($cate, $region);
                 $theme->insertCategorie();
                 unset($theme);
-                $formule = new Formule($sejour, $sejour2);
+                $formule = new Classes\Formule($sejour, $sejour2);
                 $formule->insertFormule();
                 unset($formule);
-                $travel = new Voyage($titresejour, $url, $description, $description1, $description2, $description3);
+                $travel = new Classes\Voyage($titresejour, $url, $description, $description1, $description2, $description3);
                 $travel->insertVoyage();
                 unset($travel);
                 sleep(5);
